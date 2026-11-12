@@ -1,0 +1,11 @@
+{
+  "appId": "com.touchline.clubhouse",
+  "appName": "Touchline Clubhouse",
+  "webDir": "mobile/www",
+  "ios": {
+    "contentInset": "automatic"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

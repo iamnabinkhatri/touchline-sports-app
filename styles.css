@@ -1,0 +1,92 @@
+@import url("./styles/base.css");
+@import url("./styles/shell.css");
+@import url("./styles/home.css");
+@import url("./styles/communities.css");
+@import url("./styles/polls.css");
+@import url("./styles/teams.css");
+@import url("./styles/plans.css");
+@import url("./styles/pickup.css");
+@import url("./styles/player.css");
+@import url("./styles/calendar.css");
+@import url("./styles/overlays.css");
+@import url("./styles/responsive.css");
+
+/* Keep supporting copy and metadata readable across dense dashboard screens. */
+.page :is(p, small, label, .muted, .section-count) {
+  font-size: 12px !important;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #edf3ed;
+  --ink-soft: #d7e3d9;
+  --forest: #0b2118;
+  --forest-2: #102c20;
+  --forest-3: #17402d;
+  --cream: #101a15;
+  --cream-2: #18251d;
+  --paper: #1c2a21;
+  --white: #223229;
+  --muted: #b0beb4;
+  --muted-2: #92a197;
+  --line: #3a4b3f;
+  --line-soft: #2c3c32;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .18), 0 5px 18px rgba(0, 0, 0, .12);
+  --shadow-md: 0 14px 38px rgba(0, 0, 0, .24);
+}
+
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] #app { background-color: var(--cream); color: var(--ink); }
+:root[data-theme="dark"] body::before { opacity: .05; }
+:root[data-theme="dark"] #app :is(.app-main, .main, .page, .page-header, .topbar, .site-footer) { color: var(--ink); }
+:root[data-theme="dark"] #app :is(.card, .panel, .rail-card, .post-card, .community-card, .community-feed-head, .community-glimpse-card, .member-list, .member-row, .schedule-card, .plan-detail, .plan-card, .poll-card:not(.poll-card--dark), .team-stat, .lineup-card, .modal__card, .popover, .notifications-popover, .search-results, .community-theme-setting, .community-poll-retention, .community-deletion-controls, .duty-card, .calendar-event, .calendar-day-card) {
+  background-color: var(--paper);
+  border-color: var(--line);
+  color: var(--ink);
+}
+:root[data-theme="dark"] #app :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+  background-color: #15221a;
+  border-color: var(--line);
+  color: var(--ink);
+}
+:root[data-theme="dark"] #app :is(input, textarea)::placeholder { color: var(--muted-2); }
+:root[data-theme="dark"] #app :is(.btn--light, .btn--ghost, .text-link, .search-result, .community-discovery-row, .member-row button) {
+  color: var(--ink);
+}
+:root[data-theme="dark"] #app :is(.btn--light, .btn--ghost, .search-result, .community-discovery-row) {
+  background-color: #26372c;
+  border-color: var(--line);
+}
+:root[data-theme="dark"] #app :is(.muted, .eyebrow, .field > span, .section-heading p, .site-footer, .community-card p, .member-row span) { color: var(--muted); }
+:root[data-theme="dark"] #app :is(hr, .divider, .member-row, .community-feed-head, .post-card, .calendar-grid) { border-color: var(--line); }
+:root[data-theme="dark"] .auth-screen { background: var(--cream); color: var(--ink); }
+
+.auth-provider-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0 14px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.auth-provider-divider::before,
+.auth-provider-divider::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+.google-auth-button {
+  width: 100%;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 700;
+  transition: border-color .16s ease, background-color .16s ease, transform .16s ease;
+}
+.google-auth-button:hover { background: var(--paper); border-color: var(--muted-2); transform: translateY(-1px); }
+.google-auth-button:focus-visible { outline: 3px solid var(--sky-deep); outline-offset: 3px; }
+.google-auth-button__mark { font-family: Arial, sans-serif; font-size: 20px; font-weight: 800; color: #4285f4; }
+:root[data-theme="dark"] .google-auth-button { background: #203027; border-color: var(--line); color: var(--ink); }
+:root[data-theme="dark"] .google-auth-button:hover { background: #2a3c31; }

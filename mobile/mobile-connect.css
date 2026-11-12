@@ -1,0 +1,29 @@
+:root { color-scheme: light; }
+.mobile-connect {
+  box-sizing: border-box;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: max(28px, env(safe-area-inset-top)) 24px max(24px, env(safe-area-inset-bottom));
+  background: #f5f3e9;
+  color: #102a1e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.mobile-connect__brand { display: flex; align-items: center; gap: 11px; margin-bottom: 40px; }
+.mobile-connect__brand > span { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 14px; background: #d9ff4f; font-weight: 900; }
+.mobile-connect__brand p { margin: 0; font-size: 13px; font-weight: 900; letter-spacing: .08em; }
+.mobile-connect__brand small { display: block; margin-top: 3px; color: #75817a; font-size: 9px; letter-spacing: .2em; }
+.mobile-connect__eyebrow { margin: 0 0 12px; color: #68796f; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.mobile-connect h1 { margin: 0; font-size: clamp(42px, 12vw, 64px); font-weight: 900; letter-spacing: -.07em; line-height: .96; }
+.mobile-connect__intro { margin: 18px 0 28px; color: #69776f; font-size: 16px; line-height: 1.55; }
+.mobile-connect form { display: grid; gap: 10px; }
+.mobile-connect label { margin-top: 4px; font-size: 12px; font-weight: 800; }
+.mobile-connect input { box-sizing: border-box; width: 100%; min-height: 54px; padding: 0 15px; border: 1px solid #d8d8cb; border-radius: 14px; background: #fffdf7; color: #102a1e; font: inherit; font-size: 15px; }
+.mobile-connect form small { color: #69776f; font-size: 12px; line-height: 1.5; }
+.mobile-connect #mobile-connect-error { margin: 2px 0; color: #b83a28; font-size: 13px; line-height: 1.4; }
+.mobile-connect button { min-height: 54px; margin-top: 8px; border: 0; border-radius: 14px; background: #102a1e; color: #f7ffcc; font: inherit; font-size: 15px; font-weight: 800; }
+.mobile-connect button:disabled { opacity: .65; }
+.mobile-connect footer { margin-top: 28px; color: #748178; font-size: 12px; line-height: 1.5; }

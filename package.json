@@ -1,0 +1,28 @@
+{
+  "name": "touchline-clubhouse",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A sports community clubhouse with soccer polls, team management and matchday game plans.",
+  "scripts": {
+    "start": "python3 -m backend.server",
+    "dev": "python3 -m backend.server",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "node --no-warnings --test tests/*.test.mjs",
+    "test:backend": "TOUCHLINE_PBKDF2_ITERATIONS=1000 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s backend/tests -p 'test_*.py' -v",
+    "test:coverage": "node --no-warnings --experimental-test-coverage --test tests/*.test.mjs",
+    "mobile:prepare": "node scripts/build-mobile.mjs",
+    "mobile:sync": "node scripts/build-mobile.mjs && cap sync",
+    "mobile:add:ios": "cap add ios",
+    "mobile:add:android": "cap add android",
+    "mobile:open:ios": "cap open ios",
+    "mobile:open:android": "cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.6.10",
+    "@capacitor/core": "^7.6.10",
+    "@capacitor/ios": "^7.6.10"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.6.10"
+  }
+}

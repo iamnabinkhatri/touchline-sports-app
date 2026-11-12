@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+node_modules
+data
+mobile
+ios
+android
+tests
+backend/tests
+pentest
+DerivedData
+*.db
+*.db-shm
+*.db-wal
+*.log

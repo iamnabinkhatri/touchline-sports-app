@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <base href="/" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#102a1e" />
+    <meta
+      name="description"
+      content="Touchline is the clubhouse for sports communities — soccer polls, team management, and matchday game plans in one place."
+    />
+    <title>Touchline · Clubhouse</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23D9FF4F'/%3E%3Cpath d='M15 12v40M49 12v40M15 32h34' stroke='%23102A1E' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='10' stroke='%23102A1E' stroke-width='3'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div id="app"></div>
+    <dialog id="app-modal" class="modal" aria-label="Dialog"></dialog>
+    <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="false"></div>
+    <noscript>
+      <div class="noscript">
+        <strong>Touchline needs JavaScript.</strong>
+        <p>Enable JavaScript to use the clubhouse.</p>
+      </div>
+    </noscript>
+    <script src="js/error-boundary.js"></script>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

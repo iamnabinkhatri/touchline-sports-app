@@ -1,0 +1,53 @@
+services:
+  touchline:
+    build:
+      # Replace POOL_NAME with the name of your TrueNAS storage pool.
+      context: /mnt/NAS4TB/apps/Touchline-Soccer-App/source-code
+      dockerfile: Dockerfile
+    image: touchline-clubhouse:truenas
+    restart: unless-stopped
+    init: true
+    user: "568:568"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    ports:
+      # Funnel runs on the TrueNAS host and proxies to this local-only port.
+      - "127.0.0.1:4173:4173"
+    volumes:
+      - /mnt/NAS4TB/apps/Touchline-Soccer-App/touchline-databse:/mnt/NAS4TB/apps/Touchline-Soccer-App/touchline-databse
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "4173"
+      TOUCHLINE_DB: "/data/touchline.db"
+      TOUCHLINE_APP_BASE_URL: "https://truenas-scale.tail1da715.ts.net"
+      TOUCHLINE_GOOGLE_CLIENT_ID: "${TOUCHLINE_GOOGLE_CLIENT_ID:-}"
+      TOUCHLINE_GOOGLE_CLIENT_SECRET: "${TOUCHLINE_GOOGLE_CLIENT_SECRET:-}"
+      TOUCHLINE_GOOGLE_REDIRECT_URI: "${TOUCHLINE_GOOGLE_REDIRECT_URI:-https://truenas-scale.tail1da715.ts.net/}"
+      TOUCHLINE_ADMIN_PATH: "${TOUCHLINE_ADMIN_PATH:?Set the secret admin path}"
+      TOUCHLINE_ADMIN_NAME: "Nabin Khatri"
+      TOUCHLINE_ADMIN_EMAIL: "${TOUCHLINE_ADMIN_EMAIL:?Set the admin email}"
+      TOUCHLINE_ADMIN_PASSWORD: "${TOUCHLINE_ADMIN_PASSWORD:?Set the admin password}"
+      TOUCHLINE_TIMEZONE: "America/New_York"
+      TOUCHLINE_2FA_ENCRYPTION_KEY: "${TOUCHLINE_2FA_ENCRYPTION_KEY:?Set the stable 2FA encryption key}"
+      TOUCHLINE_SMTP_HOST: "smtp.gmail.com"
+      TOUCHLINE_SMTP_PORT: "587"
+      TOUCHLINE_SMTP_TIMEOUT: "30"
+      TOUCHLINE_SMTP_USERNAME: "${TOUCHLINE_SMTP_USERNAME:-}"
+      TOUCHLINE_SMTP_PASSWORD: "${TOUCHLINE_SMTP_PASSWORD:-}"
+      TOUCHLINE_SMTP_FROM: "no-reply@clubhouse.invalid"
+      TOUCHLINE_SMTP_STARTTLS: "1"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4173/api/v1/health', timeout=4).read()"
+      interval: 30s
+      timeout: 6s
+      retries: 3
+      start_period: 30s

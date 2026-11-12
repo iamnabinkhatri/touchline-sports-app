@@ -1,0 +1,52 @@
+require_relative '../../node_modules/@capacitor/ios/scripts/pods_helpers'
+
+platform :ios, '15.0'
+use_frameworks!
+
+# workaround to avoid Xcode caching of Pods that requires
+# Product -> Clean Build Folder after new Cordova plugins installed
+# Requires CocoaPods 1.6 or newer
+install! 'cocoapods', :disable_input_output_paths => true
+
+def capacitor_pods
+  pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
+  pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
+
+end
+
+target 'App' do
+  capacitor_pods
+  # Add your Pods here
+end
+
+post_install do |installer|
+  assertDeploymentTarget(installer)
+  installer.pods_project.build_configurations.each do |build_configuration|
+    build_configuration.build_settings['CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER'] = 'NO'
+  end
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |build_configuration|
+      build_configuration.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      # CapacitorCordova ships framework headers with quoted local imports;
+      # keep newer Xcode's quoted-include diagnostic from failing app builds.
+      build_configuration.build_settings['CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER'] = 'NO'
+    end
+  end
+
+  # CocoaPods 1.16 generates an error trap using GNU `realpath -m`, which is
+  # unsupported by macOS /usr/bin/realpath. Keep the trap portable so a real
+  # embed failure reports its actual cause instead of masking it as an
+  # "Unexpected failure".
+  frameworks_script = File.join(installer.sandbox.root, 'Target Support Files/Pods-App/Pods-App-frameworks.sh')
+  if File.file?(frameworks_script)
+    script = File.read(frameworks_script)
+    script.gsub!('realpath -mq', 'realpath -q')
+    # Xcode can inherit a non-system `mkdir` first on PATH. Use macOS's
+    # system utility explicitly; otherwise the framework embed step can be
+    # killed while creating the app's Frameworks directory.
+    script = script.lines.map do |line|
+      line.start_with?('mkdir -p ') ? line.sub('mkdir -p ', '/bin/mkdir -p ') : line
+    end.join
+    File.write(frameworks_script, script)
+  end
+end
